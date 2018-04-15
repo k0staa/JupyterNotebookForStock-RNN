@@ -1,0 +1,7 @@
+notebooks/images
+notebooks/logs
+notebooks/models
+notebooks/new_stock_data
+notebooks/.ipynb_checkpoints/
+__pycache__
+
