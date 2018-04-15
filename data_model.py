@@ -23,13 +23,13 @@ class StockDataSet(object):
         self.normalized = normalized
 
         # Read csv file
-        raw_df = pd.read_csv(os.path.join("data", "%s.csv" % stock_sym))
+        raw_df = pd.read_csv(os.path.join("stock_data", "%s.mst" % stock_sym))
 
         # Merge into one sequence
         if close_price_only:
-            self.raw_seq = raw_df['Close'].tolist()
+            self.raw_seq = raw_df['<CLOSE>'].tolist()
         else:
-            self.raw_seq = [price for tup in raw_df[['Open', 'Close']].values for price in tup]
+            self.raw_seq = [price for tup in raw_df[['<OPEN>', '<CLOSE>']].values for price in tup]
 
         self.raw_seq = np.array(self.raw_seq)
         self.train_X, self.train_y, self.test_X, self.test_y = self._prepare_data(self.raw_seq)
@@ -61,10 +61,11 @@ class StockDataSet(object):
         if batch_size * num_batches < len(self.train_X):
             num_batches += 1
 
-        batch_indices = range(num_batches)
+        batch_indices = list(range(num_batches))
         random.shuffle(batch_indices)
         for j in batch_indices:
             batch_X = self.train_X[j * batch_size: (j + 1) * batch_size]
             batch_y = self.train_y[j * batch_size: (j + 1) * batch_size]
             assert set(map(len, batch_X)) == {self.num_steps}
             yield batch_X, batch_y
+
