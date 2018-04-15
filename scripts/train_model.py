@@ -7,9 +7,9 @@ import os
 import sys; sys.path.append("..")
 import tensorflow as tf
 
-from build_graph import build_lstm_graph_with_config
-from config import DEFAULT_CONFIG, MODEL_DIR
-from data_model import StockDataSet
+from .build_graph import build_lstm_graph_with_config
+from .config import DEFAULT_CONFIG, MODEL_DIR
+from .data_model import StockDataSet
 
 
 def load_data(stock_name, input_size, num_steps):

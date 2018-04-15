@@ -2,7 +2,7 @@ import numpy as np
 import random
 import tensorflow as tf
 
-from config import DEFAULT_CONFIG
+from .config import DEFAULT_CONFIG
 
 
 def build_lstm_graph_with_config(config=None):
